@@ -6,7 +6,7 @@
 
 a {
     text-decoration: none;
-    color: white !important;
+    color: black !important;
     font-weight: 500;
 }
 
@@ -22,6 +22,26 @@ hr {
     margin-bottom: 5%;
 }
 
-#MainMenu {visibility: hidden;}
+MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
+
+
+body {
+    background-color: #121212; /* Midnight Dark Background Color */
+    color: #ffffff; /* Text Color */
+}
+
+.sidebar {
+    padding: 1rem;
+    background-color: #212121; /* Sidebar Background Color */
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+}
+
+.view-count {
+    text-align: bottom-left;
+    color: black;
+}

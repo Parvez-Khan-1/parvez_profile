@@ -236,3 +236,48 @@ st.write(
 - ► Redesigned data model through iterations that improved predictions by 12%
 """
 )
+
+# Sidebar content
+st.sidebar.title("Jump to Section")
+sections = ["Executive-Summary", "Key-Skills", "Work-History", "Projects-Accomplishments"]
+
+# Create a dynamic anchor for each section
+for section in sections:
+    st.sidebar.markdown(f'<a href="#{section.lower()}">{section}</a>', unsafe_allow_html=True)
+
+# # Add some space below the sidebar
+# st.sidebar.markdown('<div style="height: 20vh;"></div>', unsafe_allow_html=True)
+#
+# # Content sections
+# st.markdown("<div id='Introduction'></div>", unsafe_allow_html=True)
+# st.markdown("## Introduction")
+# st.write("This is the introduction section.")
+#
+# st.markdown("<div id='Content'></div>", unsafe_allow_html=True)
+# st.markdown("## Content")
+# st.write("This is the content section.")
+#
+# st.markdown("<div id='Projects & Accomplishments'></div>", unsafe_allow_html=True)
+# st.markdown("## Projects & Accomplishments")
+# st.write("This is the Projects & Accomplishments")
+
+# Function to read and update view count from a file
+def update_view_count():
+    try:
+        with open("view_count.txt", "r") as f:
+            count = int(f.read())
+    except FileNotFoundError:
+        count = 0
+
+    count += 1
+
+    with open("view_count.txt", "w") as f:
+        f.write(str(count))
+
+    return count
+
+
+# Get the current view count
+view_count = update_view_count()
+
+st.markdown("<p class='view-count'>Views: %d</p>" % view_count, unsafe_allow_html=True)
