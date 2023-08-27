@@ -1,7 +1,9 @@
+import plotly.graph_objects as go
 from pathlib import Path
-
-import streamlit as st
 from PIL import Image
+import streamlit as st
+import pandas as pd
+import plotly.express as px
 
 
 # --- PATH SETTINGS ---
@@ -18,21 +20,14 @@ NAME = "Parvez Khan"
 DESCRIPTION = """
 Lead Machine Learning Engineer Specializing in Scalable ML/NLP System Development.
 """
-EMAIL = "ParvezPathan09@gmail.com"
+
 
 SOCIAL_MEDIA = {
     "LinkedIn": "https://www.linkedin.com/in/parvezkhan-pathan-389065105/",
     "GitHub": "https://github.com/Parvez-Khan-1",
-    "StackOverflow": "https://stackoverflow.com/users/5536013/parvez-khan",
+    "Stackoverflow": "https://stackoverflow.com/users/5536013/parvez-khan",
+    "Medium": "https://medium.com/@parvezpathan09",
 }
-
-PROJECTS = {
-    "🏆 Sales Dashboard - Comparing sales across three stores": "https://youtu.be/Sb0A9i6d320",
-    "🏆 Income and Expense Tracker - Web app with NoSQL database": "https://youtu.be/3egaMfE9388",
-    "🏆 Desktop Application - Excel2CSV converter with user settings & menubar": "https://youtu.be/LzCfNanQ_9c",
-    "🏆 MyToolBelt - Custom MS Excel add-in to combine Python & Excel": "https://pythonandvba.com/mytoolbelt/",
-}
-
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
@@ -45,6 +40,8 @@ with open(resume_file, "rb") as pdf_file:
 profile_pic = Image.open(profile_pic)
 
 
+EMAIL = "ParvezPathan09@gmail.com"
+
 # --- HERO SECTION ---
 col1, col2 = st.columns([1, 3])
 with col1:
@@ -53,18 +50,33 @@ with col1:
 with col2:
     st.title(NAME)
     st.write(DESCRIPTION)
-    st.download_button(
-        label=" 📄 Download Resume",
-        data=PDFbyte,
-        file_name=resume_file.name,
-        mime="application/octet-stream",
-    )
-    st.write("📫", EMAIL)
+    # with st.expander("Contact Information"):
+    #     st.write("📫", EMAIL)
+    #     st.download_button(
+    #         label=" 📄 Download Resume",
+    #         data=PDFbyte,
+    #         file_name=resume_file.name,
+    #         mime="application/octet-stream",
+    #     )
+st.write('\n')
 
 # --- SOCIAL LINKS ---
-cols = st.columns(len(SOCIAL_MEDIA))
-for index, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
-    cols[index].write(f"[{platform}]({link})")
+with st.container():
+    cols = st.columns(len(SOCIAL_MEDIA))
+    for index, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
+
+        icon = "🤝"
+
+        if platform == "LinkedIn":
+            icon = "🚀"
+
+        if platform == "GitHub":
+            icon = "👨‍💻"
+
+        if platform == "Medium":
+            icon = "Ⓜ"
+
+        cols[index].markdown(f"{icon} [{platform}]({link})", unsafe_allow_html=True)
 
 # --- EXPERIENCE & QUALIFICATIONS ---
 st.write('\n')
@@ -78,27 +90,6 @@ st.write(
 """
 )
 
-# # --- SKILLS ---
-# st.write('\n')
-# st.subheader("Key Skills")
-# st.write(
-#     """
-# - 👩‍💻 Programming Languages: Python & R
-# - ☀ Python Frameworks: Flask, FastAPI, Streamlit, Plotly, Locust
-# - 🚀 ML/DL Frameworks and Tool: H2O.ai, H2O Driverless AI, XGBoost, Tensorflow, Pytorch, Keras
-# - 📊 Data Visualization: Plotly, Dash, Kibana, Matplotlib, Seaborn
-# - 📚 Machine Learning: Regression Analysis, Classification, Clustering, Dimensionality Reduction, Evaluation Techniques, Optimization Techniques.
-# - 🧠 Deep Learning: CNN, RNN, LSTM, Encoders, Transformers, Language Modelling
-# - 🖺 Natural Language Processing: Language Modeling, Named Entity Recognition, Summarization, Classification, Question Answering, Coreference Resolution.
-# - 🗄️ Databases: Postgres, Snowflake, MongoDB
-# - ⏭ Big Data: PySpark and Hive
-# - 🛠 MLOps: Git/Bitbucket, Docker, Kubernetes, Feature Store, Experiment Store (MLFlow), Model Deployment and Monitoring, Drift Monitoring, Splunk.
-# """
-# )
-import streamlit as st
-import pandas as pd
-import plotly.graph_objects as go
-
 # Apply a predefined theme
 # st.set_page_config(page_title="Resume", page_icon=":clipboard:")
 import streamlit as st
@@ -109,43 +100,57 @@ st.write('\n')
 st.subheader("Key Skills")
 
 skills_data = [
-    ("Programming Languages", "Python & R", "⭐⭐⭐⭐⭐"),
-    ("Python Frameworks", "Flask, FastAPI, Streamlit, Plotly, Locust", "⭐⭐⭐⭐"),
-    ("ML/DL Frameworks and Tools", "H2O.ai, H2O Driverless AI, XGBoost, Tensorflow, Pytorch, Keras", "⭐⭐⭐⭐"),
-    ("Data Visualization", "Plotly, Dash, Kibana, Matplotlib, Seaborn", "⭐⭐⭐"),
-    ("Machine Learning", "Regression Analysis, Classification, Clustering, Dimensionality Reduction, Evaluation Techniques, Optimization Techniques", "⭐⭐⭐⭐⭐"),
-    ("Deep Learning", "CNN, RNN, LSTM, Encoders, Transformers, Language Modelling", "⭐⭐⭐⭐"),
-    ("Natural Language Processing", "Language Modeling, Named Entity Recognition, Summarization, Classification, Question Answering, Coreference Resolution", "⭐⭐⭐⭐"),
-    ("Databases", "Postgres, Snowflake, MongoDB", "⭐⭐⭐"),
-    ("Big Data", "PySpark and Hive", "⭐⭐⭐"),
-    ("MLOps", "Git/Bitbucket, Docker, Kubernetes, Feature Store, Experiment Store (MLFlow), Model Deployment and Monitoring, Drift Monitoring, Splunk", "⭐⭐⭐⭐")
+    ("Programming Languages", "Python & R", "⭐⭐⭐⭐⭐", 5),
+    ("Python Frameworks", "Flask, FastAPI, Streamlit, Plotly, Locust", "⭐⭐⭐⭐", 4.5),
+    ("ML/DL Frameworks and Tools", "H2O.ai, H2O Driverless AI, XGBoost, Tensorflow, Pytorch, Keras", "⭐⭐⭐⭐", 4),
+    ("Data Visualization", "Plotly, Dash, Kibana, Matplotlib, Seaborn", "⭐⭐⭐", 3),
+    ("Machine Learning", "Regression Analysis, Classification, Clustering, Dimensionality Reduction, Evaluation Techniques, Optimization Techniques", "⭐⭐⭐⭐⭐", 5),
+    ("Deep Learning", "CNN, RNN, LSTM, Encoders, Transformers, Language Modelling", "⭐⭐⭐⭐", 4.1),
+    ("Natural Language Processing", "Language Modeling, Named Entity Recognition, Summarization, Classification, Question Answering, Coreference Resolution", "⭐⭐⭐⭐", 4.3),
+    ("Databases", "Postgres, Snowflake, MongoDB", "⭐⭐⭐", 3),
+    ("Big Data", "PySpark and Hive", "⭐⭐⭐", 2.8),
+    ("MLOps", "Git/Bitbucket, Docker, Kubernetes, Feature Store, Experiment Store (MLFlow), Model Deployment and Monitoring, Drift Monitoring, Splunk", "⭐⭐⭐⭐", 4.1)
 ]
 
-df_skills = pd.DataFrame(skills_data, columns=["Skill Area", "Skills", "Expertise"])
+# Extract skills and expertise levels for plotting
+df_skills = pd.DataFrame(skills_data, columns=["Skill Area", "Skills", "Expertise", "ExpertiseLevel"])
+skills = df_skills['Skill Area'].str.split(', ', expand=True)
+# df_skills.sort_values(by=['ExpertiseLevel'], ascending=False, inplace=True)
+# Create a grouped bar chart using Plotly Express
+fig = px.bar(
+    df_skills,
+    x="Skill Area",
+    y="ExpertiseLevel",
+    color="ExpertiseLevel",
+    color_continuous_scale="Viridis",  # You can adjust the color scale
+    hover_data={"Skills": True},  # Include "Skills" in hover data
+    labels={"Skills": "Skills: "},  # Set label for hover template
+)
 
-# Add custom CSS to enhance table styling
-st.markdown("""
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-}
-th {
-    background-color: #f5f5f5;
-}
-tr:hover {
-    background-color: #f0f0f0;
-}
-</style>
-""", unsafe_allow_html=True)
+# Update hover template to include "Skills"
+fig.update_traces(
+    hovertemplate="%{yaxis.title.text}: %{y}<br>%{customdata[0]}",
+    selector=dict(type="bar"),
+)
 
-# Display the table
-st.table(df_skills.set_index('Skill Area'))
+# Update layout for better visualization
+fig.update_layout(
+    xaxis_title="Skill Area",
+    yaxis_title="Expertise Level",
+    showlegend=True,  # Show color scale legend
+    coloraxis_colorbar_title="Expertise Level",
+)
+
+# Display the Plotly figure using Streamlit
+st.write('\n')
+st.plotly_chart(fig)
+
+# df_skills = pd.DataFrame(skills_data, columns=["Skill Area", "Skills", "Expertise",  "ExpertiseLevel"])
+# df_skills = df_skills[["Skill Area", "Skills"]]
+# # Display the table
+# st.table(df_skills.set_index('Skill Area'))
+
+
 
 # --- WORK HISTORY ---
 st.write('\n')
