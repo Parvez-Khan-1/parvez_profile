@@ -4,6 +4,7 @@ from PIL import Image
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import time
 
 
 # --- PATH SETTINGS ---
@@ -80,7 +81,7 @@ with st.container():
 
 # --- EXPERIENCE & QUALIFICATIONS ---
 st.write('\n')
-st.subheader("Executive Summary")
+st.subheader("💼 Executive Summary")
 st.write(
     """
 - ✔️ Lead Machine Learning Engineer with over 7+ years of experience in NLP and Machine Learning.
@@ -97,7 +98,7 @@ import pandas as pd
 
 # --- SKILLS ---
 st.write('\n')
-st.subheader("Key Skills")
+st.subheader("🤹 Key Skills")
 
 skills_data = [
     ("Programming Languages", "Python & R", "⭐⭐⭐⭐⭐", 5),
@@ -154,19 +155,19 @@ st.plotly_chart(fig)
 
 # --- WORK HISTORY ---
 st.write('\n')
-st.subheader("Work History")
+st.subheader("🧰 Work History")
 st.write("---")
 
 # Define all jobs
 all_jobs = [
-    ("🚧", "Lead Machine Learning Engineer | Mastercard", "07/2019 - Present",
+    ("","Lead Machine Learning Engineer | Mastercard", "07/2019 - Present",
      """
      - ► Used PowerBI and SQL to redefine and track KPIs surrounding marketing initiatives, and supplied recommendations to boost landing page conversion rate by 38%
      - ► Led a team of 4 analysts to brainstorm potential marketing and sales improvements, and implemented A/B tests to generate 15% more client leads
      - ► Redesigned data model through iterations that improved predictions by 12%
      """),
 
-    ("🚧", "NLP Engineer | Synerzip Softech India Pvt Ltd", "05/2017 - 07/2019",
+    ("", "NLP Engineer | Synerzip Softech India Pvt Ltd", "05/2017 - 07/2019",
      """
      - ► Built data models and maps to generate meaningful insights from customer data, boosting successful sales efforts by 12%
      - ► Modeled targets likely to renew and presented analysis to leadership, which led to a YoY revenue increase of $300K
@@ -179,7 +180,7 @@ all_jobs = [
 # Display the first two jobs
 displayed_jobs = all_jobs[:2]
 for job in displayed_jobs:
-    st.write('\n')
+    # st.write('\n')
     st.write(job[0], "**" + job[1] + "**")
     st.write(job[2])
     st.write(job[3])
@@ -198,12 +199,12 @@ if len(all_jobs) > 2:
 
 # --- Projects & Accomplishments ---
 st.write('\n')
-st.subheader("Projects & Accomplishments")
+st.subheader("🏆 Projects & Accomplishments")
 st.write("---")
 # for project, link in PROJECTS.items():
 #     st.write(f"[{project}]({link})")
 
-st.write("🏆", "**Data Scientist Workbench | Mastercard**")
+st.write("**Data Scientist Workbench | Mastercard**")
 st.write(
     """
 - ► Used PowerBI and SQL to redefine and track KPIs surrounding marketing initiatives, and supplied recommendations to boost landing page conversion rate by 38%
@@ -213,7 +214,7 @@ st.write(
 )
 
 st.write('\n')
-st.write("🏆", "**Settlement Predictor | Mastercard**")
+st.write("**Settlement Predictor | Mastercard**")
 st.write(
     """
 - ► Used PowerBI and SQL to redefine and track KPIs surrounding marketing initiatives, and supplied recommendations to boost landing page conversion rate by 38%
@@ -223,7 +224,7 @@ st.write(
 )
 
 st.write('\n')
-st.write("🏆", "**Merchants Data Standardization**")
+st.write("**Merchants Data Standardization**")
 st.write(
     """
 - ► Used PowerBI and SQL to redefine and track KPIs surrounding marketing initiatives, and supplied recommendations to boost landing page conversion rate by 38%
@@ -233,7 +234,7 @@ st.write(
 )
 
 st.write('\n')
-st.write("🏆", "**Accelerating Cancer Cure**")
+st.write("**Accelerating Cancer Cure**")
 st.write(
     """
 - ► Used PowerBI and SQL to redefine and track KPIs surrounding marketing initiatives, and supplied recommendations to boost landing page conversion rate by 38%
@@ -250,21 +251,88 @@ sections = ["Executive-Summary", "Key-Skills", "Work-History", "Projects-Accompl
 for section in sections:
     st.sidebar.markdown(f'<a href="#{section.lower()}">{section}</a>', unsafe_allow_html=True)
 
-# # Add some space below the sidebar
-# st.sidebar.markdown('<div style="height: 20vh;"></div>', unsafe_allow_html=True)
-#
-# # Content sections
-# st.markdown("<div id='Introduction'></div>", unsafe_allow_html=True)
-# st.markdown("## Introduction")
-# st.write("This is the introduction section.")
-#
-# st.markdown("<div id='Content'></div>", unsafe_allow_html=True)
-# st.markdown("## Content")
-# st.write("This is the content section.")
-#
-# st.markdown("<div id='Projects & Accomplishments'></div>", unsafe_allow_html=True)
-# st.markdown("## Projects & Accomplishments")
-# st.write("This is the Projects & Accomplishments")
+# --- Projects & Accomplishments ---
+st.write('\n')
+st.subheader("🎓Education")
+st.write("---")
+# for project, link in PROJECTS.items():
+#     st.write(f"[{project}]({link})")
+
+st.write("**Masters In Computer Application - MCA**")
+st.write(
+    """
+- ► Completed Master In Computer Applications (MCA) From Indira Institute Of Management Affiliated To the University Of Pune With Computer Programming as Major
+"""
+)
+st.write("**Bachelors In Computer Application - BCA**")
+st.write(
+    """
+- ► Completed BCA From Nanded University With Computer Programming as Major
+"""
+)
+
+
+# --- Courses & Certification ---
+st.write('\n')
+st.subheader("🧑🏼‍🏫Courses & Certifications")
+st.write("---")
+# for project, link in PROJECTS.items():
+#     st.write(f"[{project}]({link})")
+
+st.write(
+    """
+- ► Applied Machine Learning Using Python - Coursera
+- ► Natural Language Processing With Deep Learning In Python - Udemy
+- ► Probability and Statistics for Data Science
+- ► Python A-Z : For Data Science
+"""
+)
+
+
+
+# Define your certificates and awards
+# --- Awards & Accolades ---
+st.write('\n')
+st.subheader("🧑🏼‍🏫Awards & Accolades")
+st.write("---")
+certificates = [
+    {"title": "Certificate 1", "image": "assets/certificate1.png", "description": "Description 1"},
+    {"title": "Certificate 2", "image": "assets/certificate2.png", "description": "Description 2"},
+    {"title": "Certificate 3", "image": "assets/certificate3.png", "description": "Description 3"}
+]
+
+# Placeholder to display the image
+image_placeholder = st.empty()
+
+# Slider index for navigation
+slider_index = 0
+
+# Display the selected certificate image
+selected_certificate = certificates[slider_index]
+image_placeholder.image(selected_certificate["image"], use_column_width=True)
+
+# Next and Previous buttons within the same frame
+col1, col2 = st.columns([5, 1])
+if col1.button("◀️ Previous", key="prev") and slider_index > 0:
+    slider_index -= 1
+
+if col2.button("Next ▶️", key="next") and slider_index < len(certificates) - 1:
+    slider_index += 1
+
+
+def start_slider(slider_index):
+    # Auto slide images every 7 seconds
+    while True:
+        selected_certificate = certificates[slider_index]
+        image_placeholder.image(selected_certificate["image"], use_column_width=True)
+
+        # Wait for a few seconds before displaying the next certificate
+        time.sleep(7)  # Adjust the time interval as needed
+
+        # Move to the next certificate
+        slider_index = (slider_index + 1) % len(certificates)
+
+start_slider(slider_index)
 
 # Function to read and update view count from a file
 def update_view_count():
