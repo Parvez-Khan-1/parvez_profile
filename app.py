@@ -15,8 +15,8 @@ profile_pic = current_dir / "assets" / "photo.jpg"
 
 
 # --- GENERAL SETTINGS ---
-PAGE_TITLE = "Parvez Khan | ML Engineer"
-PAGE_ICON = ":wave:"
+PAGE_TITLE = "Parvez Khan | Machine Learning Engineer"
+PAGE_ICON = "🚀"
 NAME = "Parvez Khan"
 DESCRIPTION = """
 Lead Machine Learning Engineer Specializing in Scalable ML/NLP System Development.
@@ -30,7 +30,7 @@ SOCIAL_MEDIA = {
     "Medium": "https://medium.com/@parvezpathan09",
 }
 
-st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
+st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON, layout="wide")
 
 
 # --- LOAD CSS, PDF & PROFIL PIC ---
@@ -46,7 +46,7 @@ EMAIL = "ParvezPathan09@gmail.com"
 # --- HERO SECTION ---
 col1, col2 = st.columns([1, 3])
 with col1:
-    st.image(profile_pic, width=150)
+    st.image(profile_pic, width=150,  caption="Machine Learning Engineer at Work")
 
 with col2:
     st.title(NAME)
